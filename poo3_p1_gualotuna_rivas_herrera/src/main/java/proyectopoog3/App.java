@@ -1,6 +1,5 @@
 package proyectopoog3;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class App {
     public static void main(String[] args) {
@@ -18,6 +17,8 @@ public class App {
         ArrayList<String> a5 = ManejoArchivos.LeeFichero("espacios.txt");
         
         // Creacion de los objetos
+
+        //Usuarios
         for(String user: a1){
             String[] a_user = user.strip().split("\\|");
             ArrayList<String> l_user = new ArrayList<>();
@@ -73,6 +74,7 @@ public class App {
             
         }
 
+        //Espacios
         for(String space: a5){
             String[] a_space = space.strip().split("\\|");
             ArrayList<String> l_space = new ArrayList<>();
