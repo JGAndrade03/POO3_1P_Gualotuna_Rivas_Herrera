@@ -96,6 +96,10 @@ public abstract class Usuario {
 
     }
 
+    public void reservar(){
+
+    }
+
     public void generarCodeUser(){
 
     }

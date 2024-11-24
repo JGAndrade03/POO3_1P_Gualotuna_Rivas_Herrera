@@ -36,9 +36,8 @@ public class Profesor extends Usuario{
 //Metodos
 
     @Override
-    public void gestionarReserva(){
+    public void reservar(){
         System.out.println("Reserva realizada por profesor: "+super.nombre+" "+super.apellido+" con usuario: "+super.usuario);
-
     }
 
     @Override

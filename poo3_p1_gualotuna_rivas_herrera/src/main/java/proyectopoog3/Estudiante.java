@@ -33,8 +33,8 @@ public class Estudiante extends Usuario {
     // Metodos  
 
     @Override
-    public void gestionarReserva() {
-        super.gestionarReserva();
+    public void reservar() {
+        super.reservar();
     }
 
     @Override

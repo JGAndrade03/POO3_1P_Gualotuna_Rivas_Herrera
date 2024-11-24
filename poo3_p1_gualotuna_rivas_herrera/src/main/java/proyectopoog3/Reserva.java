@@ -1,5 +1,8 @@
 package proyectopoog3;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Reserva {
     public static int reservasCreadas = 0;
     private String codReserva;
@@ -72,5 +75,20 @@ public class Reserva {
         return motivo;
     }
 
-    
+    public static Usuario verificarUsuario(ArrayList<Usuario> usuarios){
+        System.out.println("Bienvenido - Realiza tu reserva.");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Nombre de usuario: ");
+        String usuario = sc.nextLine();
+        System.out.print("Contraseña: ");
+        String contraseña = sc.nextLine();
+        for(Usuario user: usuarios){
+            if(user.getUsuario().equals(usuario)&&user.getContraseña().equals(contraseña)){
+                
+                return user;
+            }
+        }
+                System.out.println("Usuario no encontrado");
+                return null;
+    }
 }
