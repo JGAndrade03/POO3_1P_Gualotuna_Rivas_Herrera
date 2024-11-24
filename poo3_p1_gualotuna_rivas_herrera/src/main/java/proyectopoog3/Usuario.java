@@ -1,6 +1,6 @@
 package proyectopoog3;
 
-public class Usuario {
+public abstract class Usuario {
     protected String codeUser;
     protected String cedula;
     protected String nombre;

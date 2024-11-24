@@ -1,9 +1,12 @@
 package proyectopoog3;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
+
     public static void main(String[] args) {
         // Listas de objetos
+        ArrayList<Usuario> usuarios = new ArrayList<>();
         ArrayList<Estudiante> estudiantes = new ArrayList<>();
         ArrayList<Profesor> profesores = new ArrayList<>();
         ArrayList<Administrador> administradores = new ArrayList<>();
@@ -26,7 +29,7 @@ public class App {
                 l_user.add(elemento.strip());
             }
             if(l_user.get(7).equals("E")){
-                Usuario usuario = new Estudiante(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null, null);
+                Estudiante estudiante = new Estudiante(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null, null);
                 for(String est: a2){
                     ArrayList<String> l_estudiante = new ArrayList<>();
                     String[] a_estudiante = est.split("\\|");
@@ -34,15 +37,15 @@ public class App {
                         l_estudiante.add(elemento.strip());
                     }
                     if(l_user.get(0).equals(l_estudiante.get(0))){
-                        Estudiante estudiante = (Estudiante) usuario;
                         estudiante.setMatricula(l_estudiante.get(4));
                         estudiante.setCarrera(l_estudiante.get(5));
                         estudiantes.add(estudiante);
+                        usuarios.add(estudiante);
                     }
                 }
 
             }else if(l_user.get(7).equals("P")){
-                Usuario usuario = new Profesor(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null, null);
+                Profesor profesor = new Profesor(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null, null);
                 for(String prof: a3){
                     ArrayList<String> l_profesor = new ArrayList<>();
                     String[] a_profesor = prof.split("\\|");
@@ -50,14 +53,14 @@ public class App {
                         l_profesor.add(elemento.strip());
                     }
                     if(l_user.get(0).equals(l_profesor.get(0))){
-                        Profesor profesor = (Profesor) usuario;
                         profesor.setFacultad(l_profesor.get(4));
                         profesor.setMaterias(l_profesor.get(5));
                         profesores.add(profesor);
+                        usuarios.add(profesor);
                     }
                 }
             }else if(l_user.get(7).equals("A")){
-                Usuario usuario = new Administrador(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null);
+                Administrador administrador = new Administrador(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null);
                 for(String admin: a4){
                     ArrayList<String> l_administrador = new ArrayList<>();
                     String[] a_administrador = admin.split("\\|");
@@ -65,9 +68,9 @@ public class App {
                         l_administrador.add(elemento.strip());
                     }
                     if(l_user.get(0).equals(l_administrador.get(0))){
-                        Administrador administrador = (Administrador) usuario;
                         administrador.setCargo(l_administrador.get(4));
                         administradores.add(administrador);
+                        usuarios.add(administrador);
                     }
                 }
             }
@@ -87,5 +90,7 @@ public class App {
             Espacio espacio = new Espacio(l_space.get(0), tipo, l_space.get(2), capacidad, estado, l_space.get(5));
             espacios.add(espacio);
         }
+
+
     }
 }
