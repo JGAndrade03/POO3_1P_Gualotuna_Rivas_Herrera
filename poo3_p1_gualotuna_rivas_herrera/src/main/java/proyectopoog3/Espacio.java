@@ -8,6 +8,15 @@ public class Espacio {
     protected EstadoEspacio estado;
     protected String rolesPermitidos;
 
+    public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, String rolesPermitidos){
+        this.codEspacio = codEspacio;
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.estado = estado;
+        this.rolesPermitidos = rolesPermitidos;
+    }
+
     //setters
     public void setcodEspacio(String codEspacio){
         this.codEspacio=codEspacio;

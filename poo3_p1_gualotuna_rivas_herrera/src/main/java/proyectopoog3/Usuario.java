@@ -9,7 +9,15 @@ public class Usuario {
     protected String contraseña;
     protected String correo;
     
-
+    public Usuario(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo){
+        this.codeUser = codeUser;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+        this.correo = correo;
+    }
     //Setters de la clase
 
     public void setCodeUser(String codeUser){
