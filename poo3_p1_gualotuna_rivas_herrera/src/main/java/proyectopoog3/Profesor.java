@@ -4,6 +4,14 @@ public class Profesor extends Usuario{
     protected String facultad;
     protected String materias;
 
+//Constructor Profesor
+
+    public Profesor(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, String facultad, String materias){
+        super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo);
+        this.facultad=facultad;
+        this.materias=materias;
+    }
+
 //Setters
 
     public void setFacultad(String facultad){
@@ -27,11 +35,24 @@ public class Profesor extends Usuario{
 
 //Metodos
 
-    public void reserva(String usuario, String cedula){
+    @Override
+    public void gestionarReserva(){
+        System.out.println("Reserva realizada por profesor: "+super.nombre+" "+super.apellido+" con usuario: "+super.usuario);
 
     }
 
-    //public String consultarReserva(String usuario, String correo, String cedula){}
+    @Override
+    public void consultarReserva() {
+        
+    }
+
+
+    public void enviarMail(String correo){
+        
+
+    }
+
+   
         
 
     
