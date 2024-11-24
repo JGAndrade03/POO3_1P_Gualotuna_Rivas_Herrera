@@ -61,4 +61,16 @@ public class Espacio {
     public void generarCodigoEspacio(){
         
     }
+
+    @Override
+    public String toString() {
+        return "Espacio{" +
+               "codEspacio='" + codEspacio + '\'' +
+               ", tipo=" + tipo + 
+               ", nombre='" + nombre + '\'' +
+               ", capacidad=" + capacidad +
+               ", estado=" + estado +
+               ", rolesPermitidos='" + rolesPermitidos + '\'' +
+               '}';
+    }
 }

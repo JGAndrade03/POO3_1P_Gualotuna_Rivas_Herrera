@@ -52,9 +52,19 @@ public class Profesor extends Usuario{
 
     }
 
-   
-        
-
-    
+    @Override
+    public String toString() {
+        return "Profesor{" +
+               "codeUser='" + codeUser + '\'' +
+               ", cedula='" + cedula + '\'' +
+               ", nombre='" + nombre + '\'' +
+               ", apellido='" + apellido + '\'' +
+               ", usuario='" + usuario + '\'' +
+               ", contraseña='" + contraseña + '\'' +
+               ", correo='" + correo + '\'' +
+               ", facultad='" + facultad + '\'' +
+               ", materias='" + materias + '\'' +
+               '}';
+    }
 
 }

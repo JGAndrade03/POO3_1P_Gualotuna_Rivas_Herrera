@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class ManejoArchivos {
-    public static ArrayList<String> leerArchivo(String nombrearchivo) {
+    public static ArrayList<String> LeeFichero(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;
         FileReader fr = null;
@@ -26,9 +26,7 @@ public class ManejoArchivos {
             // Lectura del fichero
             String linea;
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
                 lineas.add(linea);
-
             }
 
         } catch (Exception e) {
@@ -49,7 +47,7 @@ public class ManejoArchivos {
 
     }
 
-    public static void escribirArchivo(String nombreArchivo, String linea) {
+    public static void EscribirArchivo(String nombreArchivo, String linea) {
 
         FileWriter fichero = null;
         BufferedWriter bw = null;
@@ -74,7 +72,4 @@ public class ManejoArchivos {
             }
         }
     }
-
-
 }
-

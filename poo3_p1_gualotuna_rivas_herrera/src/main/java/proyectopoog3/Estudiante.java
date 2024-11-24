@@ -42,4 +42,18 @@ public class Estudiante extends Usuario {
         super.consultarReserva();
     }
 
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+            "codeUser='" + codeUser + '\'' +
+            ", cedula='" + cedula + '\'' +
+            ", nombre='" + nombre + '\'' +
+            ", apellido='" + apellido + '\'' +
+            ", usuario='" + usuario + '\'' +
+            ", contraseña='" + contraseña + '\'' +
+            ", correo='" + correo + '\'' +
+            ", matricula='" + matricula + '\'' +
+            ", carrera='" + carrera + '\'' +
+            '}';
+}
 }

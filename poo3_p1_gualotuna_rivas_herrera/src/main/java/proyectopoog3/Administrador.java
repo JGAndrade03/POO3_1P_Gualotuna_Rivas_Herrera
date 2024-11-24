@@ -25,4 +25,18 @@ public class Administrador extends Usuario {
     public void gestionarReserva(String codReserva){
 
     }
+
+    @Override
+    public String toString() {
+        return "Administrador{" +
+               "codeUser='" + codeUser + '\'' +
+               ", cedula='" + cedula + '\'' +
+               ", nombre='" + nombre + '\'' +
+               ", apellido='" + apellido + '\'' +
+               ", usuario='" + usuario + '\'' +
+               ", contraseña='" + contraseña + '\'' +
+               ", correo='" + correo + '\'' +
+               ", cargo='" + cargo + '\'' +
+               '}';
+    }
 }

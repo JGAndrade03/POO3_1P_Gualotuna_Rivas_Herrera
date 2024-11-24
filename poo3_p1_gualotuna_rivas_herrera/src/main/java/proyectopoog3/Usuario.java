@@ -100,5 +100,18 @@ public class Usuario {
 
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+               "codeUser='" + codeUser + '\'' +
+               ", cedula='" + cedula + '\'' +
+               ", nombre='" + nombre + '\'' +
+               ", apellido='" + apellido + '\'' +
+               ", usuario='" + usuario + '\'' +
+               ", contraseña='" + contraseña + '\'' +
+               ", correo='" + correo + '\'' +
+               '}';
+    }
+
 
 }
