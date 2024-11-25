@@ -5,17 +5,15 @@ public class Reserva {
     private String codReserva;
     private Usuario usuario;
     private Espacio espacio;
-    private EstadoEspacio estadoE;
     private EstadoReserva estadoR;
     private String motivo;
 
     //Constructor Reserva
 
-    public Reserva(String codReserva, Usuario usuario, Espacio espacio, EstadoEspacio estadoE, EstadoReserva estadoR, String motivo){
+    public Reserva(String codReserva, Usuario usuario, Espacio espacio, EstadoReserva estadoR, String motivo){
         this.codReserva=codReserva;
         this.usuario=usuario;
         this.espacio=espacio;
-        this.estadoE=estadoE;
         this.estadoR=estadoR;
         this.motivo=motivo;
     }
@@ -32,10 +30,6 @@ public class Reserva {
 
     public void setEspacio(Espacio espacio){
         this.espacio=espacio;
-    }
-
-    public void setEstadoE(EstadoEspacio estadoE){
-        this.estadoE=estadoE;
     }
 
     public void setEstadoR(EstadoReserva estadoR){
@@ -58,10 +52,6 @@ public class Reserva {
 
     public Espacio getEspacio(){
         return espacio;
-    }
-
-    public EstadoEspacio getEstadoE(){
-        return estadoE;
     }
 
     public EstadoReserva getEstadoR(){

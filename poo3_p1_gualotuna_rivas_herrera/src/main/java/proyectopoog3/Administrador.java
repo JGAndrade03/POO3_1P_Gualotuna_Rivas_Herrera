@@ -1,42 +1,42 @@
 package proyectopoog3;
 
 public class Administrador extends Usuario {
-    protected String cargo;
+    private String cargo;
 
-    public Administrador(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, String cargo){
-        super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo);
+// Constructor Admin
+
+    public Administrador(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, char rol, String cargo){
+        super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo, rol);
         this.cargo=cargo;
     }
 
-    //Setters
+    //Setters Admin
 
     public void setCargo(String cargo){
         this.cargo=cargo;
     }
 
-    // Getters
+    //Getter Admin
 
     public String getCargo(){
         return cargo;
     }
 
-    //Metodos
-    
-    public void gestionarReserva(String codReserva){
+    // Metodos admin
 
+    @Override
+    public void consultarReserva(){
+        System.out.println("Los administradores no consultan reserva");
     }
 
     @Override
-    public String toString() {
-        return "Administrador{" +
-               "codeUser='" + codeUser + '\'' +
-               ", cedula='" + cedula + '\'' +
-               ", nombre='" + nombre + '\'' +
-               ", apellido='" + apellido + '\'' +
-               ", usuario='" + usuario + '\'' +
-               ", contraseña='" + contraseña + '\'' +
-               ", correo='" + correo + '\'' +
-               ", cargo='" + cargo + '\'' +
-               '}';
+    public void gestionarReserva(){
+        System.out.println("Reserva gestionada");
     }
+
+
+
+
+
+
 }

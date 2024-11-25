@@ -1,16 +1,21 @@
 package proyectopoog3;
 
-public class Estudiante extends Usuario {
-    protected String matricula;
-    protected String carrera;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-    public  Estudiante(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, String matricula, String carrera){
-        super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo);
-        this.matricula = matricula;
-        this.carrera = carrera;
+public class Estudiante extends Usuario {
+    private String matricula;
+    private String carrera;
+
+    //Constructor Estudiante
+
+    public Estudiante(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, char rol, String matricula, String carrera){
+        super(codeUser,cedula,nombre,apellido,usuario,contraseña,correo,rol);
+        this.matricula=matricula;
+        this.carrera=carrera;
     }
 
-    //Setters
+    //Setters Estudiante
 
     public void setMatricula(String matricula){
         this.matricula=matricula;
@@ -20,7 +25,7 @@ public class Estudiante extends Usuario {
         this.carrera=carrera;
     }
 
-    // Getters
+    //Getters Estudiante
 
     public String getMatricula(){
         return matricula;
@@ -30,30 +35,22 @@ public class Estudiante extends Usuario {
         return carrera;
     }
 
-    // Metodos  
+
+    //Metodos Estudiante
 
     @Override
-    public void gestionarReserva() {
-        super.gestionarReserva();
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Espacio disponible para estudiantes: ");
+
+        System.out.println("Reserva realizada por el estudiante: "+super.nombre+" "+super.apellido+" con usuario: "+super.usuario);
+        
     }
 
     @Override
     public void consultarReserva() {
-        super.consultarReserva();
+    
     }
 
-    @Override
-    public String toString() {
-        return "Estudiante{" +
-            "codeUser='" + codeUser + '\'' +
-            ", cedula='" + cedula + '\'' +
-            ", nombre='" + nombre + '\'' +
-            ", apellido='" + apellido + '\'' +
-            ", usuario='" + usuario + '\'' +
-            ", contraseña='" + contraseña + '\'' +
-            ", correo='" + correo + '\'' +
-            ", matricula='" + matricula + '\'' +
-            ", carrera='" + carrera + '\'' +
-            '}';
-}
 }

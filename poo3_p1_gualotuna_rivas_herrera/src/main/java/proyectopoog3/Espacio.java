@@ -1,20 +1,20 @@
 package proyectopoog3;
 
 public class Espacio {
-    protected String codEspacio;
-    protected TipoEspacio tipo;
-    protected String nombre;
-    protected int capacidad;
-    protected EstadoEspacio estado;
-    protected String rolesPermitidos;
+    private String codEspacio;
+    private TipoEspacio tipo;
+    private String nombre;
+    private int capacidad;
+    private EstadoEspacio estado;
+    private String rolesPermitidos;
 
-    public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, String rolesPermitidos){
-        this.codEspacio = codEspacio;
-        this.tipo = tipo;
-        this.nombre = nombre;
-        this.capacidad = capacidad;
-        this.estado = estado;
-        this.rolesPermitidos = rolesPermitidos;
+    public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, String rolesPertidos){
+        this.codEspacio=codEspacio;
+        this.tipo=tipo;
+        this.nombre=nombre;
+        this.capacidad=capacidad;
+        this.estado=estado;
+        this.rolesPermitidos=rolesPertidos;
     }
 
     //setters
@@ -54,23 +54,11 @@ public class Espacio {
     public EstadoEspacio getestado(){
         return estado;
     }
-    public String getrolesPermitidos(){
+    public String getRolesPermitidos(){
         return rolesPermitidos;
     }
 
     public void generarCodigoEspacio(){
         
-    }
-
-    @Override
-    public String toString() {
-        return "Espacio{" +
-               "codEspacio='" + codEspacio + '\'' +
-               ", tipo=" + tipo + 
-               ", nombre='" + nombre + '\'' +
-               ", capacidad=" + capacidad +
-               ", estado=" + estado +
-               ", rolesPermitidos='" + rolesPermitidos + '\'' +
-               '}';
     }
 }

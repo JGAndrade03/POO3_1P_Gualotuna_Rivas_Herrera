@@ -1,13 +1,13 @@
 package proyectopoog3;
 
 public class Profesor extends Usuario{
-    protected String facultad;
-    protected String materias;
+    private String facultad;
+    private String materias;
 
 //Constructor Profesor
 
-    public Profesor(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, String facultad, String materias){
-        super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo);
+    public Profesor(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, char rol,  String facultad, String materias){
+        super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo, rol);
         this.facultad=facultad;
         this.materias=materias;
     }
@@ -52,19 +52,9 @@ public class Profesor extends Usuario{
 
     }
 
-    @Override
-    public String toString() {
-        return "Profesor{" +
-               "codeUser='" + codeUser + '\'' +
-               ", cedula='" + cedula + '\'' +
-               ", nombre='" + nombre + '\'' +
-               ", apellido='" + apellido + '\'' +
-               ", usuario='" + usuario + '\'' +
-               ", contraseña='" + contraseña + '\'' +
-               ", correo='" + correo + '\'' +
-               ", facultad='" + facultad + '\'' +
-               ", materias='" + materias + '\'' +
-               '}';
-    }
+   
+        
+
+    
 
 }

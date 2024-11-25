@@ -1,6 +1,8 @@
 package proyectopoog3;
 
-public class Usuario {
+import java.util.ArrayList;
+
+public abstract class Usuario {
     protected String codeUser;
     protected String cedula;
     protected String nombre;
@@ -8,16 +10,21 @@ public class Usuario {
     protected String usuario;
     protected String contraseña;
     protected String correo;
-    
+    //protected char rol;
+
     public Usuario(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo){
-        this.codeUser = codeUser;
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.usuario = usuario;
-        this.contraseña = contraseña;
-        this.correo = correo;
+        this.codeUser=codeUser;
+        this.cedula=cedula;
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.usuario=usuario;
+        this.contraseña=contraseña;
+        this.correo=correo;
+        //this.rol=rol;
+       
     }
+    
+
     //Setters de la clase
 
     public void setCodeUser(String codeUser){
@@ -84,13 +91,13 @@ public class Usuario {
     
     //Metodos
 
-    public void gestionarReserva(){
+    public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
 
+    public boolean validarCredencial(String usuario, String contraseña){
+        return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
     }
 
-    public void consultarReserva(){
-
-    }
+    public abstract void consultarReserva();
 
     public void enviarMail(){
 
@@ -98,19 +105,6 @@ public class Usuario {
 
     public void generarCodeUser(){
 
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-               "codeUser='" + codeUser + '\'' +
-               ", cedula='" + cedula + '\'' +
-               ", nombre='" + nombre + '\'' +
-               ", apellido='" + apellido + '\'' +
-               ", usuario='" + usuario + '\'' +
-               ", contraseña='" + contraseña + '\'' +
-               ", correo='" + correo + '\'' +
-               '}';
     }
 
 

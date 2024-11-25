@@ -1,91 +1,82 @@
 package proyectopoog3;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
-        // Listas de objetos
-        ArrayList<Estudiante> estudiantes = new ArrayList<>();
-        ArrayList<Profesor> profesores = new ArrayList<>();
-        ArrayList<Administrador> administradores = new ArrayList<>();
-        ArrayList<Espacio> espacios = new ArrayList<>();
+        public static void mostrarMenu(Usuario user){
+            Scanner sc = new Scanner(System.in);
 
-        // Archivos
-        ArrayList<String> a1 = ManejoArchivos.LeeFichero("usuarios.txt");
-        ArrayList<String> a2 = ManejoArchivos.LeeFichero("estudiantes.txt");
-        ArrayList<String> a3 = ManejoArchivos.LeeFichero("profesores.txt");
-        ArrayList<String> a4 = ManejoArchivos.LeeFichero("administradores.txt");
-        ArrayList<String> a5 = ManejoArchivos.LeeFichero("espacios.txt");
-        
-        // Creacion de los objetos
-
-        //Usuarios
-        for(String user: a1){
-            String[] a_user = user.strip().split("\\|");
-            ArrayList<String> l_user = new ArrayList<>();
-            for (String elemento : a_user) {
-                l_user.add(elemento.strip());
-            }
-            if(l_user.get(7).equals("E")){
-                Usuario usuario = new Estudiante(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null, null);
-                for(String est: a2){
-                    ArrayList<String> l_estudiante = new ArrayList<>();
-                    String[] a_estudiante = est.split("\\|");
-                    for (String elemento : a_estudiante) {
-                        l_estudiante.add(elemento.strip());
-                    }
-                    if(l_user.get(0).equals(l_estudiante.get(0))){
-                        Estudiante estudiante = (Estudiante) usuario;
-                        estudiante.setMatricula(l_estudiante.get(4));
-                        estudiante.setCarrera(l_estudiante.get(5));
-                        estudiantes.add(estudiante);
-                    }
+            if(user instanceof Estudiante){
+                Estudiante est = (Estudiante) user;
+                System.out.println("Bienvenido estudiante: "+est.getNombre()+" "+est.getApellido());
+                System.out.println("¿Desea?\n\t1. Reservar\n\t2. Consultar Reserva");
+                System.out.print("Escriba el numero de su eleccion: ");
+                int eleccion = sc.nextInt();
+                sc.nextLine();
+                if(eleccion == 1){
+                    est.reservar();
+                }else if(eleccion == 2){
+                    est.consultarReserva();
+                }else{
+                    System.out.println("Error");
                 }
-
-            }else if(l_user.get(7).equals("P")){
-                Usuario usuario = new Profesor(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null, null);
-                for(String prof: a3){
-                    ArrayList<String> l_profesor = new ArrayList<>();
-                    String[] a_profesor = prof.split("\\|");
-                    for (String elemento : a_profesor) {
-                        l_profesor.add(elemento.strip());
-                    }
-                    if(l_user.get(0).equals(l_profesor.get(0))){
-                        Profesor profesor = (Profesor) usuario;
-                        profesor.setFacultad(l_profesor.get(4));
-                        profesor.setMaterias(l_profesor.get(5));
-                        profesores.add(profesor);
-                    }
+            }else if(user instanceof Profesor){
+                Profesor prof = (Profesor) user;
+                System.out.println("Bienvenido profesor/a: "+prof.getNombre()+" "+prof.getApellido());
+                System.out.println("¿Desea?\n\t1. Reservar\n\t2. Consultar Reserva");
+                System.out.print("Escriba el numero de su eleccion: ");
+                int eleccion = sc.nextInt();
+                sc.nextLine();
+                if(eleccion == 1){
+                    prof.reservar();
+                }else if(eleccion == 2){
+                    prof.consultarReserva();
+                }else{
+                    System.out.println("Error");
                 }
-            }else if(l_user.get(7).equals("A")){
-                Usuario usuario = new Administrador(l_user.get(0), l_user.get(1), l_user.get(2), l_user.get(3), l_user.get(4), l_user.get(5), l_user.get(6), null);
-                for(String admin: a4){
-                    ArrayList<String> l_administrador = new ArrayList<>();
-                    String[] a_administrador = admin.split("\\|");
-                    for (String elemento : a_administrador) {
-                        l_administrador.add(elemento.strip());
-                    }
-                    if(l_user.get(0).equals(l_administrador.get(0))){
-                        Administrador administrador = (Administrador) usuario;
-                        administrador.setCargo(l_administrador.get(4));
-                        administradores.add(administrador);
-                    }
+            }else if(user instanceof Administrador){
+                Administrador admin = (Administrador) user;
+                System.out.println("Bienvenido administrador/a: "+admin.getNombre()+" "+admin.getApellido());
+                System.out.println("¿Desea?\n\t1. Gestionar Reservar\n\t2. Consultar Reserva");
+                System.out.print("Escriba el numero de su eleccion: ");
+                int eleccion = sc.nextInt();
+                sc.nextLine();
+                if(eleccion == 1){
+                    admin.gestionarReserva();
+                }else if(eleccion == 2){
+                    admin.consultarReserva();
+                }else{
+                    System.out.println("Error");
                 }
             }
-            
         }
-
-        //Espacios
-        for(String space: a5){
-            String[] a_space = space.strip().split("\\|");
-            ArrayList<String> l_space = new ArrayList<>();
-            for (String elemento : a_space) {
-                l_space.add(elemento.strip());
-            }
-            int capacidad = Integer.parseInt(l_space.get(3));
-            TipoEspacio tipo = TipoEspacio.valueOf(l_space.get(1));
-            EstadoEspacio estado = EstadoEspacio.valueOf(l_space.get(4));
-            Espacio espacio = new Espacio(l_space.get(0), tipo, l_space.get(2), capacidad, estado, l_space.get(5));
-            espacios.add(espacio);
+    
+        public static void main(String[] args) {
+            // Listas de objetos
+            ArrayList<Usuario> usuarios = new ArrayList<>();
+            ArrayList<Estudiante> estudiantes = new ArrayList<>();
+            ArrayList<Profesor> profesores = new ArrayList<>();
+            ArrayList<Administrador> administradores = new ArrayList<>();
+            ArrayList<Espacio> espacios = new ArrayList<>();
+    
+            // Archivos
+            ArrayList<String> a1 = ManejoArchivos.leeFichero("usuarios.txt");
+            ArrayList<String> a2 = ManejoArchivos.leeFichero("estudiantes.txt");
+            ArrayList<String> a3 = ManejoArchivos.leeFichero("profesores.txt");
+            ArrayList<String> a4 = ManejoArchivos.leeFichero("administradores.txt");
+            ArrayList<String> a5 = ManejoArchivos.leeFichero("espacios.txt");
+            ArrayList<String> a6 = ManejoArchivos.leeFichero("reservas.txt");
+            
+            // Creacion de los objetos
+            //Usuarios
+            estudiantes = ManejoArchivos.genListaEstudiantes(a1, a2);
+            profesores = ManejoArchivos.genListaProfesores(a1, a3);
+            administradores = ManejoArchivos.genListaAdministradores(a1, a4);
+            usuarios = ManejoArchivos.genListaUsuarios(a1, a2, a3, a4);
+            //Espacios
+            espacios = ManejoArchivos.genListaEspacios(a5);
+    
+            //Programa
+            mostrarMenu(Reserva.verificarUsuario(usuarios));
         }
     }
-}
