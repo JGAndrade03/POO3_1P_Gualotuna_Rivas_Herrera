@@ -13,8 +13,9 @@ public class App {
                 System.out.print("Escriba el numero de su eleccion: ");
                 int eleccion = sc.nextInt();
                 sc.nextLine();
+
                 if(eleccion == 1){
-                    est.reservar();
+                    est.gestionarReserva(null, null);
                 }else if(eleccion == 2){
                     est.consultarReserva();
                 }else{
@@ -28,7 +29,7 @@ public class App {
                 int eleccion = sc.nextInt();
                 sc.nextLine();
                 if(eleccion == 1){
-                    prof.reservar();
+                    prof.gestionarReserva(null, null);
                 }else if(eleccion == 2){
                     prof.consultarReserva();
                 }else{
@@ -42,14 +43,15 @@ public class App {
                 int eleccion = sc.nextInt();
                 sc.nextLine();
                 if(eleccion == 1){
-                    admin.gestionarReserva();
+                    admin.gestionarReserva(null, null);
                 }else if(eleccion == 2){
                     admin.consultarReserva();
                 }else{
                     System.out.println("Error");
                 }
-            }
-        }
+
+            }sc.close();
+        } 
     
         public static void main(String[] args) {
             // Listas de objetos
@@ -58,6 +60,7 @@ public class App {
             ArrayList<Profesor> profesores = new ArrayList<>();
             ArrayList<Administrador> administradores = new ArrayList<>();
             ArrayList<Espacio> espacios = new ArrayList<>();
+            ArrayList<Reserva> reservas = new ArrayList<>();
     
             // Archivos
             ArrayList<String> a1 = ManejoArchivos.leeFichero("usuarios.txt");
@@ -73,10 +76,14 @@ public class App {
             profesores = ManejoArchivos.genListaProfesores(a1, a3);
             administradores = ManejoArchivos.genListaAdministradores(a1, a4);
             usuarios = ManejoArchivos.genListaUsuarios(a1, a2, a3, a4);
+
             //Espacios
             espacios = ManejoArchivos.genListaEspacios(a5);
+
+            //Reservas
+            reservas = ManejoArchivos.genListaReservas(a6);
     
             //Programa
-            mostrarMenu(Reserva.verificarUsuario(usuarios));
+            mostrarMenu(Reserva.verificarUsuario("jperez", "contrasena",usuarios));
         }
     }

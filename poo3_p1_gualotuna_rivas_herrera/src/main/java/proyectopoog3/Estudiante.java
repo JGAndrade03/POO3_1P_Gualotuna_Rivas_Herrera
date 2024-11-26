@@ -39,25 +39,18 @@ public class Estudiante extends Usuario {
     //Metodos Estudiante
 
     @Override
-    public void reservar(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
-        System.out.println("Espacios disponibles para estudiantes: ");
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
+        System.out.println("Espacios disponibles para estudiantes: "); //AJUSTAR METODO RESERVA PARA ESTUDIANTE
         for(Espacio espacio : espacios){
             if(espacio.getRolesPermitidos().equals(RolesPermitidos.ESTUDIANTE) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)){
             
                 if(espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)){
-                    System.out.println("El espacio: "+espacio+" esta disponible");
+                    System.out.println("El espacio: "+espacio+" con codigo: "+espacio.getcodEspacio()+ "esta disponible");
                 }
             }
 
         }
 
-    }
-
-    @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas) {
-        System.out.println("Los estudiantes no pueden gestionar reservas");
-
-        
     }
 
     @Override

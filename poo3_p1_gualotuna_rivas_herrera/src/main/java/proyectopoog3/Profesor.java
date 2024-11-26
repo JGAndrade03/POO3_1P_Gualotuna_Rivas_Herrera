@@ -40,14 +40,23 @@ public class Profesor extends Usuario{
 //Metodos
 
     @Override
-    public void reservar(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
+    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
+
+        Scanner sc = new Scanner(System.in); //AJUSTAR METODO GESTIONAR RESERVA PARA PROFESOR
 
         System.out.println("Espacios disponibles para profesores: ");
         for(Espacio espacio : espacios){
             if(espacio.getRolesPermitidos().equals(RolesPermitidos.PROFESOR) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)){
             
                 if(espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)){
-                    System.out.println("El espacio: "+espacio+" esta disponible");
+                    System.out.println("El espacio: "+espacio+" con codigo: "+espacio.getcodEspacio()+" esta disponible");
+                    System.out.println("Ingrese el codigo del espacio que desea reservar: ");
+                    String codSelection = sc.nextLine();
+
+                    if(codSelection == espacio.getcodEspacio()){
+                        Reserva reserva = new Reserva(codSelection, codSelection, null, null, codSelection);
+                        reservas.add(reserva);
+                    }
                 }
             }
 
@@ -57,12 +66,7 @@ public class Profesor extends Usuario{
 
 
     }
-
-    @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
-        System.out.println("Los profesores no pueden gestionar reservas");
-    }
-
+    
     @Override
     public void consultarReserva() {
         

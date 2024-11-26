@@ -43,7 +43,7 @@ public class Administrador extends Usuario {
         }else{
             for(Reserva reserva : reservas){
                 if(reserva.getEstadoR().equals(EstadoReserva.PENDIENTE)){
-                    System.out.println("La reserva: "+reserva+" se encuentra en estado pendiente");
+                    System.out.println("La reserva: "+reserva.getCodReserva()+" se encuentra en estado pendiente");
 
                     System.out.println("¿Desea aprobar (A) o rechazar (R) la reserva? \n (A/R)");
                     String seleccion = sc.nextLine().toUpperCase();
@@ -66,6 +66,9 @@ public class Administrador extends Usuario {
             }
 
         }
+        sc.close();
+
+
 
     }
 

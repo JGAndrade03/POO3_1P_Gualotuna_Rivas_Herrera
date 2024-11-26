@@ -212,7 +212,7 @@ public class ManejoArchivos {
             int capacidad = Integer.parseInt(l_space.get(3));
             TipoEspacio tipo = TipoEspacio.valueOf(l_space.get(1));
             EstadoEspacio estado = EstadoEspacio.valueOf(l_space.get(4));
-            RolesPermitidos permiso = RolesPermitidos.valueOf(l_space.get(5))
+            RolesPermitidos permiso = RolesPermitidos.valueOf(l_space.get(5));
 
             Espacio espacio = new Espacio(l_space.get(0), tipo, l_space.get(2), capacidad, estado, permiso);
             espacios.add(espacio);
@@ -238,6 +238,35 @@ public class ManejoArchivos {
 
         }
         return reservas;
+    }
+
+
+
+    public static void EscribirArchivo(String nombreArchivo, String linea) {
+
+        FileWriter fichero = null;
+        BufferedWriter bw = null;
+      
+        try {
+            fichero = new FileWriter(nombreArchivo,true);
+            bw = new BufferedWriter(fichero);
+            bw.write(linea+"\n");
+            System.out.println("ksdsdlsd");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    //fichero.close();
+                    bw.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 
 

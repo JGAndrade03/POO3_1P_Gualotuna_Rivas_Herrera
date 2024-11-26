@@ -1,20 +1,24 @@
 package proyectopoog3;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Reserva {
     public static int reservasCreadas = 0;
     private String codReserva;
-    private String usuario;
+    private String codUsuario;
+    private String cedulaUsuario;
+    private String fecha;
+    private String codEspacio;
     private TipoEspacio espacio;
     private EstadoReserva estadoR;
     private String motivo;
 
     //Constructor Reserva
 
-    public Reserva(String codReserva, String usuario, TipoEspacio espacio, EstadoReserva estadoR, String motivo){
+    public Reserva(String codReserva, String codUsuario, TipoEspacio espacio, EstadoReserva estadoR, String motivo){
         this.codReserva=codReserva;
-        this.usuario=usuario;
+        this.codUsuario=codUsuario;
         this.espacio=espacio;
         this.estadoR=estadoR;
         this.motivo=motivo;
@@ -26,8 +30,20 @@ public class Reserva {
         this.codReserva=codReserva;
     }
 
-    public void setUsuario(String usuario){
-        this.usuario=usuario;
+    public void setUsuario(String codUsuario){
+        this.codUsuario=codUsuario;
+    }
+
+    public void setCedulaUsuario(String cedulaUsuario){
+        this.cedulaUsuario=cedulaUsuario;
+    }
+
+    public void setFecha(String fecha){
+        this.fecha=fecha;
+    }
+
+    public void setCodEspacio(String codEspacio){
+        this.codEspacio=codEspacio;
     }
 
     public void setEspacio(TipoEspacio espacio){
@@ -48,8 +64,20 @@ public class Reserva {
         return codReserva;
     }
 
-    public String getUsuario(){
-        return usuario;
+    public String getCodUsuario(){
+        return codUsuario;
+    }
+
+    public String getCedulaUsuario(){
+        return cedulaUsuario;
+    }
+
+    public String getFecha(){
+        return fecha;
+    }
+
+    public String getCodEspacio(){
+        return codEspacio;
     }
 
     public TipoEspacio getEspacio(){
@@ -67,9 +95,22 @@ public class Reserva {
 
     //METODOS RESERVA
 
-   public static void verificarUsuario(ArrayList<Usuario> usuarios){
+   public static Usuario verificarUsuario(String usuario, String contrasena, ArrayList<Usuario> usuarios){
 
-   }
+        for(Usuario user : usuarios){
+            if(user.getUsuario().equalsIgnoreCase(usuario) && user.validarCredencial(usuario, contrasena)){
+                return user;
+            }
+        }
+        return null;
+           
+
+        
+
+    }
+    
+
+
 
    public void generarCodeReserva(){
 
