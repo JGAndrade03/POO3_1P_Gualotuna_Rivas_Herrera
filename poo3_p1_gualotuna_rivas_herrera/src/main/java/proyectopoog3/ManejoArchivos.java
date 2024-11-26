@@ -54,7 +54,7 @@ public class ManejoArchivos {
     }
 
 
-    public static ArrayList<Estudiante> genListaEstudiante(ArrayList<String> a1, ArrayList<String> a2){
+    public static ArrayList<Estudiante> genListaEstudiantes(ArrayList<String> a1, ArrayList<String> a2){
         ArrayList<Estudiante> estudiantes = new ArrayList<>();
         for(String user : a1){
             String[] a_user = user.strip().split("\\|");
@@ -201,7 +201,7 @@ public class ManejoArchivos {
 
     //ArrayList ESPACIOS
 
-    public static ArrayList<Espacio> generarListaEspacios(ArrayList<String> a5){
+    public static ArrayList<Espacio> genListaEspacios(ArrayList<String> a5){
         ArrayList<Espacio> espacios = new ArrayList<>();
         for(String space: a5){
             String[] a_space = space.strip().split("\\|");
@@ -212,13 +212,33 @@ public class ManejoArchivos {
             int capacidad = Integer.parseInt(l_space.get(3));
             TipoEspacio tipo = TipoEspacio.valueOf(l_space.get(1));
             EstadoEspacio estado = EstadoEspacio.valueOf(l_space.get(4));
-            Espacio espacio = new Espacio(l_space.get(0), tipo, l_space.get(2), capacidad, estado, l_space.get(5));
+            RolesPermitidos permiso = RolesPermitidos.valueOf(l_space.get(5))
+
+            Espacio espacio = new Espacio(l_space.get(0), tipo, l_space.get(2), capacidad, estado, permiso);
             espacios.add(espacio);
         }
         return espacios;
 
     }
+    
+    //ArrayList RESERVAS
 
+    public static ArrayList<Reserva> genListaReservas(ArrayList<String> a6){
+        ArrayList<Reserva> reservas = new ArrayList<>();
+        for(String res : a6){
+            String[] a_reserva = res.strip().split("\\|");
+            ArrayList<String> l_reserva = new ArrayList<>();
+            for(String elemento : a_reserva){
+                l_reserva.add(elemento.strip());
+            }
+            TipoEspacio espacio = TipoEspacio.valueOf(l_reserva.get(5));
+            EstadoReserva estadoR = EstadoReserva.valueOf(l_reserva.get(6));
+            Reserva reserva = new Reserva(l_reserva.get(0), l_reserva.get(1),espacio, estadoR, l_reserva.get(7));
+            reservas.add(reserva);
+
+        }
+        return reservas;
+    }
 
 
     

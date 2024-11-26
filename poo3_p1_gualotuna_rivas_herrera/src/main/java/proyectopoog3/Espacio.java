@@ -6,9 +6,9 @@ public class Espacio {
     private String nombre;
     private int capacidad;
     private EstadoEspacio estado;
-    private String rolesPermitidos;
+    private RolesPermitidos rolesPermitidos;
 
-    public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, String rolesPertidos){
+    public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, RolesPermitidos rolesPertidos){
         this.codEspacio=codEspacio;
         this.tipo=tipo;
         this.nombre=nombre;
@@ -33,7 +33,7 @@ public class Espacio {
     public void setestado(EstadoEspacio estado){
         this.estado=estado;
     }
-    public void setrolesPermitidos(String rolesPermitidos){
+    public void setrolesPermitidos(RolesPermitidos rolesPermitidos){
         this.rolesPermitidos=rolesPermitidos;
     }
 
@@ -48,13 +48,13 @@ public class Espacio {
     public String getnombre(){
         return nombre;
     }
-    public int getcapacidad(){
+    public int getCapacidad(){
         return capacidad;
     }
-    public EstadoEspacio getestado(){
+    public EstadoEspacio getEstado(){
         return estado;
     }
-    public String getRolesPermitidos(){
+    public RolesPermitidos getRolesPermitidos(){
         return rolesPermitidos;
     }
 

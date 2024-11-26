@@ -1,16 +1,18 @@
 package proyectopoog3;
 
+import java.util.ArrayList;
+
 public class Reserva {
     public static int reservasCreadas = 0;
     private String codReserva;
-    private Usuario usuario;
-    private Espacio espacio;
+    private String usuario;
+    private TipoEspacio espacio;
     private EstadoReserva estadoR;
     private String motivo;
 
     //Constructor Reserva
 
-    public Reserva(String codReserva, Usuario usuario, Espacio espacio, EstadoReserva estadoR, String motivo){
+    public Reserva(String codReserva, String usuario, TipoEspacio espacio, EstadoReserva estadoR, String motivo){
         this.codReserva=codReserva;
         this.usuario=usuario;
         this.espacio=espacio;
@@ -24,11 +26,11 @@ public class Reserva {
         this.codReserva=codReserva;
     }
 
-    public void setUsuario(Usuario usuario){
+    public void setUsuario(String usuario){
         this.usuario=usuario;
     }
 
-    public void setEspacio(Espacio espacio){
+    public void setEspacio(TipoEspacio espacio){
         this.espacio=espacio;
     }
 
@@ -46,11 +48,11 @@ public class Reserva {
         return codReserva;
     }
 
-    public Usuario getUsuario(){
+    public String getUsuario(){
         return usuario;
     }
 
-    public Espacio getEspacio(){
+    public TipoEspacio getEspacio(){
         return espacio;
     }
 
@@ -62,5 +64,15 @@ public class Reserva {
         return motivo;
     }
 
+
+    //METODOS RESERVA
+
+   public static void verificarUsuario(ArrayList<Usuario> usuarios){
+
+   }
+
+   public void generarCodeReserva(){
+
+   }
     
 }

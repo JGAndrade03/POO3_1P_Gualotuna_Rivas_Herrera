@@ -91,6 +91,8 @@ public abstract class Usuario {
     
     //Metodos
 
+    public abstract void reservar(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
+
     public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
 
     public boolean validarCredencial(String usuario, String contraseña){
@@ -98,6 +100,7 @@ public abstract class Usuario {
     }
 
     public abstract void consultarReserva();
+    
 
     public void enviarMail(){
 
