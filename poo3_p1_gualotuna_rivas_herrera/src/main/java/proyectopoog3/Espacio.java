@@ -1,5 +1,7 @@
 package proyectopoog3;
 
+import java.util.ArrayList;
+
 public class Espacio {
     private String codEspacio;
     private TipoEspacio tipo;
@@ -7,6 +9,7 @@ public class Espacio {
     private int capacidad;
     private EstadoEspacio estado;
     private RolesPermitidos rolesPermitidos;
+    public static ArrayList<Espacio> espacios = new ArrayList<>();
 
     public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, RolesPermitidos rolesPertidos){
         this.codEspacio=codEspacio;

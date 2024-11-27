@@ -97,7 +97,7 @@ public abstract class Usuario {
         return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
     }
 
-    public abstract void consultarReserva();
+    public abstract void consultarReserva(ArrayList<Usuario> usuarios);
     
 
     public void enviarMail(){

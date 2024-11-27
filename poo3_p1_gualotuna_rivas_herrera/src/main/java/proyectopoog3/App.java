@@ -17,7 +17,7 @@ public class App {
                 if(eleccion == 1){
                     est.gestionarReserva(null);
                 }else if(eleccion == 2){
-                    est.consultarReserva();
+                    est.consultarReserva(null);
                 }else{
                     System.out.println("Error");
                 }
@@ -31,7 +31,7 @@ public class App {
                 if(eleccion == 1){
                     prof.gestionarReserva(null);
                 }else if(eleccion == 2){
-                    prof.consultarReserva();
+                    prof.consultarReserva(null);
                 }else{
                     System.out.println("Error");
                 }
@@ -45,7 +45,7 @@ public class App {
                 if(eleccion == 1){
                     admin.gestionarReserva(null);
                 }else if(eleccion == 2){
-                    admin.consultarReserva();
+                    admin.consultarReserva(null);
                 }else{
                     System.out.println("Error");
                 }

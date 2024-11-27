@@ -16,6 +16,7 @@ public class Reserva {
     private EstadoReserva estadoR;
     private String motivo;
     public static ArrayList<Reserva> reservas = new ArrayList<>();
+    
 
     // Constructor Reserva
 
@@ -85,7 +86,7 @@ public class Reserva {
         return codEspacio;
     }
 
-    public TipoEspacio getEspacio() {
+    public TipoEspacio getTipoEspacio() {
         return espacio;
     }
 
@@ -115,7 +116,7 @@ public class Reserva {
 
         System.out.println("Usuario no encontrado");
         sc.close();
-        
+
         return null;
                     
     }

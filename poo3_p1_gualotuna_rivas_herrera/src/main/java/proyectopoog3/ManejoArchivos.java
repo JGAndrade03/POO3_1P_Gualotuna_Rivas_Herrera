@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class ManejoArchivos {
 
+    public static ArrayList<Usuario> usuarios = new ArrayList<>();
+
     //Metodo de lectura
 
     public static ArrayList<String> leeFichero(String nombrearchivo){
