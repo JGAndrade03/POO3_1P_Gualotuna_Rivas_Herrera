@@ -91,7 +91,7 @@ public abstract class Usuario {
     
     //Metodos
 
-    public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
+    public abstract void gestionarReserva(ArrayList<Espacio> espacios);
 
     public boolean validarCredencial(String usuario, String contraseña){
         return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
@@ -104,9 +104,9 @@ public abstract class Usuario {
 
     }
 
-    public void generarCodeUser(){
 
+    public String toSring(){
+        return "";
     }
-
 
 }

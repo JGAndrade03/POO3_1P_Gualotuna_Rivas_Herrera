@@ -15,7 +15,7 @@ public class App {
                 sc.nextLine();
 
                 if(eleccion == 1){
-                    est.gestionarReserva(null, null);
+                    est.gestionarReserva(null);
                 }else if(eleccion == 2){
                     est.consultarReserva();
                 }else{
@@ -29,7 +29,7 @@ public class App {
                 int eleccion = sc.nextInt();
                 sc.nextLine();
                 if(eleccion == 1){
-                    prof.gestionarReserva(null, null);
+                    prof.gestionarReserva(null);
                 }else if(eleccion == 2){
                     prof.consultarReserva();
                 }else{
@@ -43,7 +43,7 @@ public class App {
                 int eleccion = sc.nextInt();
                 sc.nextLine();
                 if(eleccion == 1){
-                    admin.gestionarReserva(null, null);
+                    admin.gestionarReserva(null);
                 }else if(eleccion == 2){
                     admin.consultarReserva();
                 }else{
@@ -72,9 +72,7 @@ public class App {
             
             // Creacion de los objetos
             //Usuarios
-            estudiantes = ManejoArchivos.genListaEstudiantes(a1, a2);
-            profesores = ManejoArchivos.genListaProfesores(a1, a3);
-            administradores = ManejoArchivos.genListaAdministradores(a1, a4);
+           
             usuarios = ManejoArchivos.genListaUsuarios(a1, a2, a3, a4);
 
             //Espacios
@@ -84,6 +82,6 @@ public class App {
             reservas = ManejoArchivos.genListaReservas(a6);
     
             //Programa
-            mostrarMenu(Reserva.verificarUsuario("jperez", "contrasena",usuarios));
+            mostrarMenu(Reserva.verificarUsuario(usuarios));
         }
     }

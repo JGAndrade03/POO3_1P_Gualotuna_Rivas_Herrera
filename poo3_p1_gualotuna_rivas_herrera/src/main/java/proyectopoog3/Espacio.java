@@ -21,7 +21,7 @@ public class Espacio {
     public void setcodEspacio(String codEspacio){
         this.codEspacio=codEspacio;
     }
-    public void settipo(TipoEspacio tipo){
+    public void setTipo(TipoEspacio tipo){
         this.tipo=tipo;
     }
     public void setnombre(String nombre){
@@ -42,7 +42,7 @@ public class Espacio {
     public String getcodEspacio(){
         return codEspacio;
     }
-    public TipoEspacio gettipo(){
+    public TipoEspacio getTipo(){
         return tipo;
     }
     public String getnombre(){
@@ -60,5 +60,18 @@ public class Espacio {
 
     public void generarCodigoEspacio(){
         
+    }
+
+    //METODOS
+
+    public String toString() {
+        return "Espacio{" +
+               "codEspacio='" + codEspacio + '\'' +
+               ", tipo=" + tipo + 
+               ", nombre='" + nombre + '\'' +
+               ", capacidad=" + capacidad +
+               ", estado=" + estado +
+               ", rolesPermitidos='" + rolesPermitidos + '\'' +
+               '}';
     }
 }
