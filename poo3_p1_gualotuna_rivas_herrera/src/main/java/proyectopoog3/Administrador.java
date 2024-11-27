@@ -27,49 +27,100 @@ public class Administrador extends Usuario {
 
     // Metodos admin
 
-    @Override
-    public void consultarReserva(){
-        System.out.println("Los administradores no consultan reserva");
-    }
+    //@Override
+    // public void consultarReserva(){
+    //     System.out.println("Los administradores no consultan reserva");
+    // }
 
     @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
+    public void gestionarReserva(ArrayList<Espacio> espacios) {
         Scanner sc = new Scanner(System.in);
+        String continuar;
 
-        System.out.println("====================== Gestión de Reservas ========================");
-        if(reservas.isEmpty()){
-            System.out.println("No hay reservas pendientes por revisar.");
-
-        }else{
-            for(Reserva reserva : reservas){
-                if(reserva.getEstadoR().equals(EstadoReserva.PENDIENTE)){
-                    System.out.println("La reserva: "+reserva.getCodReserva()+" se encuentra en estado pendiente");
-
+        do{
+            System.out.println("====================== Gestión de Reservas ========================");
+            if(Reserva.reservas.isEmpty()){
+                System.out.println("No hay reservas pendientes por revisar.");
+    
+            }else{
+                for(Reserva reserva : Reserva.reservas){
+                    if(reserva.getEstadoR().equals(EstadoReserva.PENDIENTE)){
+                        System.out.println("La reserva: "+reserva.getCodReserva()+" se encuentra en estado pendiente");
+    
+                    }
+    
+                }
+    
+                for(Reserva reserva : Reserva.reservas){
+    
                     System.out.println("¿Desea aprobar (A) o rechazar (R) la reserva? \n (A/R)");
                     String seleccion = sc.nextLine().toUpperCase();
-
+        
                     if(seleccion.equals("A")){
                         reserva.setEstadoR(EstadoReserva.APROBADO);
                         System.out.println("Reserva Aprobada");
-
+        
                     }else if(seleccion.equals("R")){
                         System.out.println("Ingrese motivo del rechazo: ");
                         String motivoR = sc.nextLine();
-
+        
                         reserva.setEstadoR(EstadoReserva.RECHAZADO);
                         reserva.setMotivo(motivoR);
-
+        
                         System.out.println("Su reserva ha sido rechazada por el siguiente motivo: "+motivoR);
                     }
 
                 }
+              
             }
+            System.out.println("Desea continuar con la revisión? (Si/No)");
+            continuar = sc.nextLine().toUpperCase();
+        
 
-        }
+            
+        }while(continuar.equals("SI"));
+
+        System.out.println("Gestion de reservas finalizada");
+    
         sc.close();
 
+    }
 
 
+    @Override
+    public void consultarReserva(){
+        // if(Reserva.reservasCreadas == 0){
+        //     System.out.println("No hay reservas por consultar");
+        // }
+        // Usuario user = Reserva.verificarUsuario(usuarios);
+        // System.out.println("Número de reservas creadas: "+Reserva.reservasCreadas);
+        // for(Reserva reserva : Reserva.reservas){
+        //     if(reserva instanceof(Estudiante))
+
+        // }
+
+
+
+    }
+
+    public void enviarMail(String correo) {
+
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Administrador{" +
+               "codeUser='" + codeUser + '\'' +
+               ", cedula='" + cedula + '\'' +
+               ", nombre='" + nombre + '\'' +
+               ", apellido='" + apellido + '\'' +
+               ", usuario='" + usuario + '\'' +
+               ", contraseña='" + contraseña + '\'' +
+               ", correo='" + correo + '\'' +
+               ", cargo='" + cargo + '\'' +
+               '}';
     }
 
 

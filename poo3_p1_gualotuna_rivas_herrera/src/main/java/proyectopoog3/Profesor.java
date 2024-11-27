@@ -1,86 +1,131 @@
 package proyectopoog3;
 
-import java.net.Socket;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Profesor extends Usuario{
+public class Profesor extends Usuario {
     private String facultad;
-    private String materias;
+    private ArrayList<String> materias;
 
-//Constructor Profesor
+    // Constructor Profesor
 
-    public Profesor(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo, String facultad, String materias){
+    public Profesor(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña,
+            String correo, String facultad, ArrayList<String> materias) {
         super(codeUser, cedula, nombre, apellido, usuario, contraseña, correo);
-        this.facultad=facultad;
-        this.materias=materias;
+        this.facultad = facultad;
+        this.materias = materias;
     }
 
-//Setters
+    // Setters
 
-    public void setFacultad(String facultad){
-        this.facultad=facultad;
+    public void setFacultad(String facultad) {
+        this.facultad = facultad;
     }
 
-    public void setMaterias(String materias){
-        this.materias=materias;
+    public void setMaterias(ArrayList<String> materias) {
+        this.materias = materias;
     }
 
-// Getters
+    // Getters
 
-    public String getFacultad(){
+    public String getFacultad() {
         return facultad;
     }
 
-    public String getMaterias(){
+    public ArrayList<String> getMaterias() {
         return materias;
     }
 
-
-//Metodos
+    // Metodos
 
     @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
+    public void gestionarReserva(ArrayList<Espacio> espacios) {
 
-        Scanner sc = new Scanner(System.in); //AJUSTAR METODO GESTIONAR RESERVA PARA PROFESOR
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("Espacios disponibles para profesores: ");
-        for(Espacio espacio : espacios){
-            if(espacio.getRolesPermitidos().equals(RolesPermitidos.PROFESOR) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)){
-            
-                if(espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)){
-                    System.out.println("El espacio: "+espacio+" con codigo: "+espacio.getcodEspacio()+" esta disponible");
-                    System.out.println("Ingrese el codigo del espacio que desea reservar: ");
-                    String codSelection = sc.nextLine();
+        for (Espacio espacio : espacios) {
+            if (espacio.getRolesPermitidos().equals(RolesPermitidos.PROFESOR) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)) {
 
-                    if(codSelection == espacio.getcodEspacio()){
-                        Reserva reserva = new Reserva(codSelection, codSelection, null, null, codSelection);
-                        reservas.add(reserva);
-                    }
+                if (espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)) {
+                    System.out.println(
+                            "El " + espacio.getTipo() + ": " + espacio.getnombre() + " con codigo: " + espacio.getcodEspacio() + " esta disponible");
+
                 }
             }
 
         }
+        System.out.println("Ingrese el codigo del espacio que desea reservar: ");
+        String codSelection = sc.nextLine();
+        String motivo;
+        System.out.println("Para cual de sus materias es esta reserva: ");
+        int contador = 1;
+        for(String materia: materias){
+            System.out.println(contador+". "+materia);
+            contador+=1;
+        }
+        System.out.print("Escriba el numero de su eleccion: ");
+        int eleccion = sc.nextInt();
+        sc.nextLine();
+        motivo = materias.get(eleccion-1);
+        System.out.println("Escriba la fecha de su reserva con el formato AAAA-MM-DD: ");
+        String fecha = sc.nextLine();
 
-       
+        LocalDate fdate = LocalDate.parse(fecha);
 
+        for( Espacio espacio : espacios){
+            if (codSelection.equals(espacio.getcodEspacio())) {
+                Reserva reserva = new Reserva(Reserva.generarCodeReserva(), super.codeUser, super.cedula, fdate, Espacio.generarCodigoEspacio(), espacio.getTipo(), EstadoReserva.APROBADO, motivo);
+                Reserva.reservasCreadas++;
+
+                String codR = String.valueOf(reserva.getCodReserva());
+                String codE = String.valueOf(reserva.getCodEspacio());
+                String tipoE = reserva.getEspacio().toString();
+                String estadoR = reserva.getEstadoR().toString();
+
+                String linea = "\n"+codR+" | "+super.codeUser+" | "+super.cedula+" | "+fdate+" | "+codE+" | "+tipoE+" | "+estadoR+" | "+motivo;
+                                                                                                     
+                System.out.println("Desea realizar la reserva (Si/No): ");
+                String election = sc.nextLine();
+                if(election.toUpperCase().equals("SI")){
+                    Reserva.reservas.add(reserva);
+                    ManejoArchivos.EscribirArchivo("reservas.txt", linea);
+                    System.out.println("Su reserva fue realizada con exito.");
+                    enviarMail();
+                    App.mostrarMenu(this, espacios);
+                }else{
+                    App.mostrarMenu(this, espacios);
+                }
+            }
+
+        }
+        sc.close();
 
     }
-    
+
     @Override
     public void consultarReserva() {
-        
-    }
-
-
-    public void enviarMail(String correo){
-        
 
     }
 
-   
-        
+    public void enviarMail() {
 
-    
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor{" +
+               "codeUser='" + codeUser + '\'' +
+               ", cedula='" + cedula + '\'' +
+               ", nombre='" + nombre + '\'' +
+               ", apellido='" + apellido + '\'' +
+               ", usuario='" + usuario + '\'' +
+               ", contraseña='" + contraseña + '\'' +
+               ", correo='" + correo + '\'' +
+               ", facultad='" + facultad + '\'' +
+               ", materias='" + materias + '\'' +
+               '}';
+    }
 
 }

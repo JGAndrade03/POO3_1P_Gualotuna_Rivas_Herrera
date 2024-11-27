@@ -1,12 +1,8 @@
 package proyectopoog3;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class Estudiante extends Usuario {
     private String matricula;
@@ -43,18 +39,61 @@ public class Estudiante extends Usuario {
 
     //Metodos Estudiante
 
-    @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas){
-        System.out.println("Espacios disponibles para estudiantes: "); //AJUSTAR METODO RESERVA PARA ESTUDIANTE
-        for(Espacio espacio : espacios){
-            if(espacio.getRolesPermitidos().equals(RolesPermitidos.ESTUDIANTE) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)){
-            
-                if(espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)){
-                    System.out.println("El espacio: "+espacio+" con codigo: "+espacio.getcodEspacio()+ "esta disponible");
+   @Override
+    public void gestionarReserva(ArrayList<Espacio> espacios) {
+
+        Scanner sc = new Scanner(System.in); 
+
+        System.out.println("Espacios disponibles para estudiantes: ");
+        for (Espacio espacio : espacios) {
+            if (espacio.getRolesPermitidos().equals(RolesPermitidos.ESTUDIANTE) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)) {
+
+                if (espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)) {
+                    System.out.println(
+                            "El " + espacio.getTipo() + ": " + espacio.getnombre() + " con codigo: " + espacio.getcodEspacio() + " esta disponible");
+
                 }
             }
 
         }
+        System.out.println("Ingrese el codigo del espacio que desea reservar: ");
+        String codSelection = sc.nextLine();
+        System.out.println("Ingrese el motivo de su reserva: ");
+        String motivo = sc.nextLine();
+        System.out.println("Escriba la fecha de su reserva con el formato AAAA-MM-DD: ");
+        String fecha = sc.nextLine();
+
+        LocalDate fdate = LocalDate.parse(fecha);
+
+        for( Espacio espacio : espacios){
+            if (codSelection.equals(espacio.getcodEspacio())) {
+                Reserva reserva = new Reserva(Reserva.generarCodeReserva(), super.codeUser, super.cedula, fdate, Espacio.generarCodigoEspacio(), espacio.getTipo(), EstadoReserva.PENDIENTE, motivo);
+                Reserva.reservasCreadas++;
+
+                String codR = String.valueOf(reserva.getCodReserva());
+                String codE = String.valueOf(reserva.getCodEspacio());
+                String tipoE = reserva.getEspacio().toString();
+                String estadoR = reserva.getEstadoR().toString();
+
+                String linea = "\n"+codR+" | "+super.codeUser+" | "+super.cedula+" | "+fdate+" | "+codE+" | "+tipoE+" | "+estadoR+" | "+motivo;
+                
+                System.out.println("Desea realizar la reserva (Si/No): ");
+                String election = sc.nextLine();
+                if(election.toUpperCase().equals("SI")){
+                    Reserva.reservas.add(reserva);
+                    ManejoArchivos.EscribirArchivo("reservas.txt", linea);
+                    System.out.println("Su reserva se encuentra pendiente.");
+                    enviarMail();
+                    App.mostrarMenu(this, espacios);
+                }else{
+                    App.mostrarMenu(this, espacios);
+                }
+
+                
+            }
+
+        }
+        sc.close();
 
     }
 
@@ -63,19 +102,25 @@ public class Estudiante extends Usuario {
     
     }
 
-    public void enviarCorreo(String receptor){
-       Session ses =  super.iniciarSesion(receptor);
-                try{
-            Message mes = new MimeMessage(ses);
-            mes.setFrom(new InternetAddress(user, "APP DE RESERVAS"));
-            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receptor));
-            mes.setSubject("SUJETO DEL CORREO");
-            mes.setText("TEXTO DEL CORREO");
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+    public void enviarMail() {
 
     }
-    
 
+    @Override
+    public String toString() {
+        return "Estudiante{" +
+            "codeUser='" + codeUser + '\'' +
+            ", cedula='" + cedula + '\'' +
+            ", nombre='" + nombre + '\'' +
+            ", apellido='" + apellido + '\'' +
+            ", usuario='" + usuario + '\'' +
+            ", contraseña='" + contraseña + '\'' +
+            ", correo='" + correo + '\'' +
+            ", matricula='" + matricula + '\'' +
+            ", carrera='" + carrera + '\'' +
+            '}';
+}
+
+    
+    
 }

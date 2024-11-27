@@ -1,5 +1,7 @@
 package proyectopoog3;
 
+import java.util.Random;
+
 public class Espacio {
     private String codEspacio;
     private TipoEspacio tipo;
@@ -21,7 +23,7 @@ public class Espacio {
     public void setcodEspacio(String codEspacio){
         this.codEspacio=codEspacio;
     }
-    public void settipo(TipoEspacio tipo){
+    public void setTipo(TipoEspacio tipo){
         this.tipo=tipo;
     }
     public void setnombre(String nombre){
@@ -42,7 +44,7 @@ public class Espacio {
     public String getcodEspacio(){
         return codEspacio;
     }
-    public TipoEspacio gettipo(){
+    public TipoEspacio getTipo(){
         return tipo;
     }
     public String getnombre(){
@@ -58,4 +60,25 @@ public class Espacio {
         return rolesPermitidos;
     }
 
+    public static int generarCodigoEspacio() {
+
+        Random random = new Random();
+        int numAle = 1000 + random.nextInt(9000);
+
+        return numAle;
+
+    }
+
+    //METODOS
+
+    public String toString() {
+        return "Espacio{" +
+               "codEspacio='" + codEspacio + '\'' +
+               ", tipo=" + tipo + 
+               ", nombre='" + nombre + '\'' +
+               ", capacidad=" + capacidad +
+               ", estado=" + estado +
+               ", rolesPermitidos='" + rolesPermitidos + '\'' +
+               '}';
+    }
 }
