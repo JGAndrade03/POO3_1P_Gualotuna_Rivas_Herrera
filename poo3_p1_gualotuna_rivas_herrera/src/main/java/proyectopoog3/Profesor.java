@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 public class Profesor extends Usuario {
     private String facultad;
     private ArrayList<String> materias;
@@ -92,7 +97,7 @@ public class Profesor extends Usuario {
                     Reserva.reservas.add(reserva);
                     ManejoArchivos.EscribirArchivo("reservas.txt", linea);
                     System.out.println("Su reserva fue realizada con exito.");
-                    enviarMail();
+                    enviarMail("cgomez@universidad.edu", reserva);//se quemo el coreo de uno de los administradores. como se escoge el administrador a quien enviar?
                     App.mostrarMenu(this, espacios);
                 }else{
                     App.mostrarMenu(this, espacios);
@@ -109,7 +114,21 @@ public class Profesor extends Usuario {
 
     }
 
-    public void enviarMail() {
+    public void enviarMail(String receptor, Reserva reserva) {
+        Session ses =  super.iniciarSesion();
+                try{
+            Message mes = new MimeMessage(ses);
+            mes.setFrom(new InternetAddress(this.correo, "Prof. " + nombre));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receptor));
+            mes.setSubject("Reserva realizada");
+            mes.setText("Se le notifica que el profesor " + nombre +  "\n" + //
+                                apellido +  "ha realizado una reserva con codigo\n" + //
+                                reserva.getCodReserva() +" para la fecha" + reserva.getFecha() + " en el auditorio\n" + //
+                                reserva.getEspacio() + " para la materia\n" + //
+                                "Fundamentos de Programación.");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
 
     }
 

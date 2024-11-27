@@ -3,6 +3,11 @@ package proyectopoog3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 public class Administrador extends Usuario {
     private String cargo;
 
@@ -59,14 +64,15 @@ public class Administrador extends Usuario {
                     if(seleccion.equals("A")){
                         reserva.setEstadoR(EstadoReserva.APROBADO);
                         System.out.println("Reserva Aprobada");
-        
+                        enviarMail(continuar, reserva); //la reseerva deberia incluir el mail de quien la realixa para saber a donde enviar el correo de resultado
+
                     }else if(seleccion.equals("R")){
                         System.out.println("Ingrese motivo del rechazo: ");
                         String motivoR = sc.nextLine();
         
                         reserva.setEstadoR(EstadoReserva.RECHAZADO);
                         reserva.setMotivo(motivoR);
-        
+                        eniarMail(continuar, reserva); //la reseerva deberia incluir el mail de quien la realixa para saber a donde enviar el correo de resultado
                         System.out.println("Su reserva ha sido rechazada por el siguiente motivo: "+motivoR);
                     }
 
@@ -102,9 +108,24 @@ public class Administrador extends Usuario {
 
 
     }
-
-    public void enviarMail(String correo) {
-
+    //@Override
+    public void enviarMail(String receptor, Reserva res) {
+               Session ses =  super.iniciarSesion();
+                try{
+            Message mes = new MimeMessage(ses);
+            mes.setFrom(new InternetAddress(this.correo, "Admin. " + nombre));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receptor));//error, la reserva deheria incluir el correo de quien la realiza
+            if (res.getEstadoR() == EstadoReserva.APROBADO){
+                mes.setSubject("Reserva Aprobada");
+                mes.setText("Se ha aprobado su reserva con código" + res.getCodReserva() + " \n. Atentamente, Departamento Administrativo");
+            }else if (res.getEstadoR() == EstadoReserva.RECHAZADO){
+                mes.setSubject("Reserva Rechazada");
+                mes.setText("Se ha rechazado su reserva con código" + res.getCodReserva() +"por el motivo" + res.getMotivo() + " \n. Atentamente, Departamento Administrativo");
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+ 
     }
 
 

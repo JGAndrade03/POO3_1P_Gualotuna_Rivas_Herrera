@@ -1,6 +1,16 @@
 package proyectopoog3;
 
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
+
+//librerias para correos
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import io.github.cdimascio.dotenv.*;
+import java.util.Properties;
+
 
 public abstract class Usuario {
     protected String codeUser;
@@ -11,7 +21,6 @@ public abstract class Usuario {
     protected String contraseña;
     protected String correo;
     //protected char rol;
-    public Usuario espacios;
 
     public Usuario(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo){
         this.codeUser=codeUser;
@@ -92,7 +101,7 @@ public abstract class Usuario {
     
     //Metodos
 
-    public abstract void gestionarReserva(ArrayList<Espacio> espacios);
+    public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
 
     public boolean validarCredencial(String usuario, String contraseña){
         return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
@@ -101,13 +110,61 @@ public abstract class Usuario {
     public abstract void consultarReserva();
     
 
-    public void enviarMail(){
+    public Session iniciarSesion(){
+        Dotenv dot = Dotenv.load();
 
+        String host =dot.get("MAIL_HOST");
+        String port = dot.get("MAIL_PORT");
+        String user = correo;
+        String pass = contraseña;   
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host",host );
+        prop.put("mail.smtp.port", port);
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", true);
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(user, pass);
+            }
+        });
+        return session;
     }
 
-
-    public String toSring(){
-        return "";
-    }
+    public void eniarMail(String receptor, Reserva res){}
+   
 
 }
+// metodo enviar correo completo
+// public void enviarMail(String receptor){
+//         Dotenv dot = Dotenv.load();
+
+//         String host =dot.get("MAIL_HOST");
+//         String port = dot.get("MAIL_PORT");
+//         String user = correo;
+//         String pass = contraseña;   
+
+//         Properties prop = new Properties();
+//         prop.put("mail.smtp.host",host );
+//         prop.put("mail.smtp.port", port);
+//         prop.put("mail.smtp.auth", true);
+//         prop.put("mail.smtp.starttls.enable", true);
+
+//         Session session = Session.getInstance(prop, new Authenticator() {
+//             protected PasswordAuthentication getpPasswordAuthentication(){
+//                 return new PasswordAuthentication(user, pass);
+//             }
+//         });
+
+//         try{
+//             Message mes = new MimeMessage(session);
+//             mes.setFrom(new InternetAddress(user, "APP DE RESERVAS"));
+//             mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receptor));
+//             mes.setSubject("SUJETO DEL CORREO");
+//             mes.setText("TEXTO DEL CORREO");
+//         }catch(Exception e){
+//             System.out.println(e.getMessage());
+//         }
+
+//     }
