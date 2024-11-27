@@ -1,6 +1,16 @@
 package proyectopoog3;
 
+import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
+
+//librerias para correos
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import io.github.cdimascio.dotenv.*;
+import java.util.Properties;
+
 
 public abstract class Usuario {
     protected String codeUser;
@@ -100,13 +110,28 @@ public abstract class Usuario {
     public abstract void consultarReserva();
     
 
-    public void enviarMail(){
+    public void iniciarSesion(String receptor){
+        Dotenv dot = Dotenv.load();
+
+        String host =dot.get("MAIL_HOST");
+        String port = dot.get("MAIL_PORT");
+        String user = correo;
+        String pass = contraseña;   
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host",host );
+        prop.put("mail.smtp.port", port);
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", true);
+
+        Session session = Session.getInstance(prop, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication(){
+                return new PasswordAuthentication(user, pass);
+            }
+        });
 
     }
 
-    public void generarCodeUser(){
-
-    }
-
+    return session
 
 }

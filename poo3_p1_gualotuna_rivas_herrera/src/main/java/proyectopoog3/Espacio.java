@@ -58,7 +58,4 @@ public class Espacio {
         return rolesPermitidos;
     }
 
-    public void generarCodigoEspacio(){
-        
-    }
 }

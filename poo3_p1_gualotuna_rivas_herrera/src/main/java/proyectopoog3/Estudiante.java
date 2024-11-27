@@ -3,6 +3,11 @@ package proyectopoog3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 public class Estudiante extends Usuario {
     private String matricula;
     private String carrera;
@@ -58,6 +63,19 @@ public class Estudiante extends Usuario {
     
     }
 
+    public void enviarCorreo(String receptor){
+       Session ses =  super.iniciarSesion(receptor);
+                try{
+            Message mes = new MimeMessage(ses);
+            mes.setFrom(new InternetAddress(user, "APP DE RESERVAS"));
+            mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receptor));
+            mes.setSubject("SUJETO DEL CORREO");
+            mes.setText("TEXTO DEL CORREO");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
     
 
 }
