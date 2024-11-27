@@ -11,20 +11,21 @@ public class Reserva {
     private String codUsuario;
     private String cedulaUsuario;
     private LocalDate fecha;
-    private String codEspacio;
+    private int codEspacio;
     private TipoEspacio espacio;
     private EstadoReserva estadoR;
     private String motivo;
     public static ArrayList<Reserva> reservas = new ArrayList<>();
-    
 
     // Constructor Reserva
 
-    public Reserva(int codReserva, String codUsuario, LocalDate fecha, TipoEspacio espacio, EstadoReserva estadoR,
+    public Reserva(int codReserva, String codUsuario, String cedulaUsuario, LocalDate fecha, int codEspacio, TipoEspacio espacio, EstadoReserva estadoR,
             String motivo) {
         this.codReserva = codReserva;
         this.codUsuario = codUsuario;
+        this.cedulaUsuario = cedulaUsuario;
         this.fecha = fecha;
+        this.codEspacio = codEspacio;
         this.espacio = espacio;
         this.estadoR = estadoR;
         this.motivo = motivo;
@@ -48,7 +49,7 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public void setCodEspacio(String codEspacio) {
+    public void setCodEspacio(int codEspacio) {
         this.codEspacio = codEspacio;
     }
 
@@ -82,11 +83,11 @@ public class Reserva {
         return fecha;
     }
 
-    public String getCodEspacio() {
+    public int getCodEspacio() {
         return codEspacio;
     }
 
-    public TipoEspacio getTipoEspacio() {
+    public TipoEspacio getEspacio() {
         return espacio;
     }
 
@@ -101,6 +102,7 @@ public class Reserva {
     // METODOS RESERVA
 
     public static Usuario verificarUsuario(ArrayList<Usuario> usuarios){
+        System.out.println("------------------------------------------------------------");
         System.out.println("Bienvenido - Realiza tu reserva.");
         Scanner sc = new Scanner(System.in);
         System.out.print("Nombre de usuario: ");
@@ -116,7 +118,7 @@ public class Reserva {
 
         System.out.println("Usuario no encontrado");
         sc.close();
-
+        
         return null;
                     
     }
@@ -128,6 +130,19 @@ public class Reserva {
 
         return numAle;
 
+    }
+
+    public String toString() {
+        return "Reserva{" +
+               "codReserva=" + codReserva +
+               ", codUsuario='" + codUsuario + '\'' +
+               ", cedulaUsuario='" + cedulaUsuario + '\'' +
+               ", fecha=" + fecha +
+               ", codEspacio=" + codEspacio +
+               ", espacio=" + espacio +
+               ", estadoR=" + estadoR +
+               ", motivo='" + motivo + '\'' +
+               '}';
     }
 
 }

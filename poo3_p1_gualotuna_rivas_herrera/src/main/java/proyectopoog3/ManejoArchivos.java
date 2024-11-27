@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 public class ManejoArchivos {
 
-    public static ArrayList<Usuario> usuarios = new ArrayList<>();
-
     //Metodo de lectura
 
     public static ArrayList<String> leeFichero(String nombrearchivo){
@@ -153,7 +151,8 @@ public class ManejoArchivos {
             EstadoReserva estadoR = EstadoReserva.valueOf(l_reserva.get(6));
             LocalDate fecha = LocalDate.parse(l_reserva.get(3));
             int codReserva = Integer.parseInt(l_reserva.get(0));
-            Reserva reserva = new Reserva(codReserva, l_reserva.get(2), fecha, espacio, estadoR, l_reserva.get(7));
+            int codEspacio = Integer.parseInt(l_reserva.get(4));
+            Reserva reserva = new Reserva(codReserva, l_reserva.get(1), l_reserva.get(2), fecha, codEspacio, espacio, estadoR, l_reserva.get(7));
             reservas.add(reserva);
 
         }
@@ -172,7 +171,7 @@ public class ManejoArchivos {
         try {
             fichero = new FileWriter(nombreArchivo,true);
             bw = new BufferedWriter(fichero);
-            bw.write(linea+"\n");
+            bw.write(linea);
     
 
         } catch (Exception e) {

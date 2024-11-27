@@ -1,6 +1,6 @@
 package proyectopoog3;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Espacio {
     private String codEspacio;
@@ -9,7 +9,6 @@ public class Espacio {
     private int capacidad;
     private EstadoEspacio estado;
     private RolesPermitidos rolesPermitidos;
-    public static ArrayList<Espacio> espacios = new ArrayList<>();
 
     public Espacio(String codEspacio, TipoEspacio tipo, String nombre, int capacidad, EstadoEspacio estado, RolesPermitidos rolesPertidos){
         this.codEspacio=codEspacio;
@@ -61,8 +60,13 @@ public class Espacio {
         return rolesPermitidos;
     }
 
-    public void generarCodigoEspacio(){
-        
+    public static int generarCodigoEspacio() {
+
+        Random random = new Random();
+        int numAle = 1000 + random.nextInt(9000);
+
+        return numAle;
+
     }
 
     //METODOS

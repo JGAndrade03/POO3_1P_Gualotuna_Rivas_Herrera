@@ -11,6 +11,7 @@ public abstract class Usuario {
     protected String contraseña;
     protected String correo;
     //protected char rol;
+    public Usuario espacios;
 
     public Usuario(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo){
         this.codeUser=codeUser;
@@ -97,7 +98,7 @@ public abstract class Usuario {
         return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
     }
 
-    public abstract void consultarReserva(ArrayList<Usuario> usuarios);
+    public abstract void consultarReserva();
     
 
     public void enviarMail(){
