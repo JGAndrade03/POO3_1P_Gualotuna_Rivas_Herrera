@@ -1,13 +1,25 @@
-package proyectopoog3;
+package proyectopoog3.Usuarios;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.mail.Message;
-import javax.mail.Session;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import io.github.cdimascio.dotenv.*;
+import proyectopoog3.App;
+import proyectopoog3.ManejoArchivos;
+import proyectopoog3.Enums.EstadoEspacio;
+import proyectopoog3.Enums.EstadoReserva;
+import proyectopoog3.Enums.RolesPermitidos;
+import proyectopoog3.EspacioYReserva.Espacio;
+import proyectopoog3.EspacioYReserva.Reserva;
+
+import java.util.Properties;
+
 
 public class Profesor extends Usuario {
     private String facultad;
@@ -54,8 +66,8 @@ public class Profesor extends Usuario {
             if (espacio.getRolesPermitidos().equals(RolesPermitidos.PROFESOR) || espacio.getRolesPermitidos().equals(RolesPermitidos.AMBOS)) {
 
                 if (espacio.getEstado().equals(EstadoEspacio.DISPONIBLE)) {
-                    System.out.println(
-                            "El " + espacio.getTipo() + ": " + espacio.getnombre() + " con codigo: " + espacio.getcodEspacio() + " esta disponible");
+                    System.out.println("Espacios disponibles: ");
+                    System.out.println(espacio);
 
                 }
             }
@@ -74,14 +86,22 @@ public class Profesor extends Usuario {
         int eleccion = sc.nextInt();
         sc.nextLine();
         motivo = materias.get(eleccion-1);
+        LocalDate fdate = null;
+        boolean fechaValida = false;
+        while (!fechaValida) {
         System.out.println("Escriba la fecha de su reserva con el formato AAAA-MM-DD: ");
         String fecha = sc.nextLine();
-
-        LocalDate fdate = LocalDate.parse(fecha);
+        try {
+            fdate = LocalDate.parse(fecha);  // Intenta convertir la fecha a LocalDate
+            fechaValida = true;  // La fecha es válida, salimos del ciclo
+        } catch (DateTimeParseException e) {
+            System.out.println("Fecha inválida. Por favor, ingrese una fecha en el formato AAAA-MM-DD.");
+        }
+        }
 
         for( Espacio espacio : espacios){
             if (codSelection.equals(espacio.getcodEspacio())) {
-                Reserva reserva = new Reserva(Reserva.generarCodeReserva(), super.codeUser, super.cedula, fdate, Espacio.generarCodigoEspacio(), espacio.getTipo(), EstadoReserva.APROBADO, motivo);
+                Reserva reserva = new Reserva(Reserva.generarCodeReserva(), super.codeUser, super.cedula, fdate, Espacio.generarCodigoEspacio(), espacio.getTipo(), EstadoReserva.APROBADO, motivo, this.getCorreo());
                 Reserva.reservasCreadas++;
 
                 String codR = String.valueOf(reserva.getCodReserva());
@@ -96,12 +116,17 @@ public class Profesor extends Usuario {
                 if(election.toUpperCase().equals("SI")){
                     Reserva.reservas.add(reserva);
                     ManejoArchivos.EscribirArchivo("reservas.txt", linea);
-                    System.out.println("Su reserva fue realizada con exito.");
-                    enviarMail("cgomez@universidad.edu", reserva);//se quemo el coreo de uno de los administradores. como se escoge el administrador a quien enviar?
+                    System.out.println("Su "+reserva);
+                    System.out.println("Fue APROBADA CON EXITO.");
+                    this.enviarMail("cgomez@universidad.edu", reserva);
+                    Reserva.reservasCreadas++;
                     App.mostrarMenu(this, espacios);
                 }else{
                     App.mostrarMenu(this, espacios);
                 }
+            }else{
+                System.out.println("Seleccione un codigo valido");
+                App.mostrarMenu(this, espacios);
             }
 
         }
@@ -110,8 +135,31 @@ public class Profesor extends Usuario {
     }
 
     @Override
-    public void consultarReserva() {
+    public void consultarReserva(ArrayList<Reserva> reservas) {
+        Scanner sc = new Scanner(System.in);
+        LocalDate fdate = null;
+        boolean fechaValida = false;
 
+        while (!fechaValida) {
+        System.out.println("Escriba la fecha de su reserva con el formato AAAA-MM-DD: ");
+        String fecha = sc.nextLine();
+
+        try {
+            fdate = LocalDate.parse(fecha); 
+            fechaValida = true; 
+        } catch (DateTimeParseException e) {
+            System.out.println("Fecha inválida. Por favor, ingrese una fecha en el formato AAAA-MM-DD.");
+        }
+        }
+
+    
+        for (Reserva res : reservas) {
+            String fdateReserva = res.getFecha().toString(); 
+            if ( this.getCodeUser().equals(res.getCodUsuario())) {
+            System.out.println(res);
+        }
+        }
+        App.mostrarMenu(this, App.espacios);
     }
 
     public void enviarMail(String receptor, Reserva reserva) {

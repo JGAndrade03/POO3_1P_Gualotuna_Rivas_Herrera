@@ -1,6 +1,10 @@
-package proyectopoog3;
+package proyectopoog3.EspacioYReserva;
 
 import java.util.Random;
+
+import proyectopoog3.Enums.EstadoEspacio;
+import proyectopoog3.Enums.RolesPermitidos;
+import proyectopoog3.Enums.TipoEspacio;
 
 public class Espacio {
     private String codEspacio;
@@ -72,13 +76,13 @@ public class Espacio {
     //METODOS
 
     public String toString() {
-        return "Espacio{" +
-               "codEspacio='" + codEspacio + '\'' +
-               ", tipo=" + tipo + 
-               ", nombre='" + nombre + '\'' +
-               ", capacidad=" + capacidad +
-               ", estado=" + estado +
-               ", rolesPermitidos='" + rolesPermitidos + '\'' +
+        return "Espacio {" +
+               "codigo: " + codEspacio +
+               " | tipo: " + tipo + 
+               " | nombre: " + nombre +
+               " | capacidad: " + capacidad +
+               " | estado: " + estado +
+               " | Roles Permitidos: " + rolesPermitidos +
                '}';
     }
 }

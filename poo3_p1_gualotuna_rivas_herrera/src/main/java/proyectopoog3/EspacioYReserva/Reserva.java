@@ -1,12 +1,18 @@
-package proyectopoog3;
+package proyectopoog3.EspacioYReserva;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+
+import proyectopoog3.App;
+import proyectopoog3.Enums.EstadoReserva;
+import proyectopoog3.Enums.TipoEspacio;
+import proyectopoog3.Usuarios.Usuario;
+
 import java.time.LocalDate;
 
 public class Reserva {
-    public static int reservasCreadas = 0;
+    public static int reservasCreadas = 15;
     private int codReserva;
     private String codUsuario;
     private String cedulaUsuario;
@@ -15,12 +21,13 @@ public class Reserva {
     private TipoEspacio espacio;
     private EstadoReserva estadoR;
     private String motivo;
+    private String correoUsuario;
     public static ArrayList<Reserva> reservas = new ArrayList<>();
 
     // Constructor Reserva
 
     public Reserva(int codReserva, String codUsuario, String cedulaUsuario, LocalDate fecha, int codEspacio, TipoEspacio espacio, EstadoReserva estadoR,
-            String motivo) {
+            String motivo, String correoUsuario) {
         this.codReserva = codReserva;
         this.codUsuario = codUsuario;
         this.cedulaUsuario = cedulaUsuario;
@@ -29,6 +36,7 @@ public class Reserva {
         this.espacio = espacio;
         this.estadoR = estadoR;
         this.motivo = motivo;
+        this.correoUsuario = correoUsuario;
     }
 
     // Setters Reserva
@@ -99,6 +107,10 @@ public class Reserva {
         return motivo;
     }
 
+    public String getcorreoUsuario(){
+        return correoUsuario;
+    }
+
     // METODOS RESERVA
 
     public static Usuario verificarUsuario(ArrayList<Usuario> usuarios){
@@ -117,10 +129,10 @@ public class Reserva {
         }
 
         System.out.println("Usuario no encontrado");
+        App.mostrarMenu(verificarUsuario(App.usuarios), App.espacios);
         sc.close();
         
-        return null;
-                    
+        return null;      
     }
 
     public static int generarCodeReserva() {
@@ -133,15 +145,15 @@ public class Reserva {
     }
 
     public String toString() {
-        return "Reserva{" +
-               "codReserva=" + codReserva +
-               ", codUsuario='" + codUsuario + '\'' +
-               ", cedulaUsuario='" + cedulaUsuario + '\'' +
-               ", fecha=" + fecha +
-               ", codEspacio=" + codEspacio +
-               ", espacio=" + espacio +
-               ", estadoR=" + estadoR +
-               ", motivo='" + motivo + '\'' +
+        return "Reserva {" +
+               "codigo: " + codReserva +
+               " | codigo del usuario: " + codUsuario +
+               " | cedula: " + cedulaUsuario +
+               " | fecha: " + fecha +
+               " | codigo del espacio: " + codEspacio +
+               " | espacio: " + espacio +
+               " | estado de la Reserva: " + estadoR +
+               " | motivo: " + motivo + 
                '}';
     }
 

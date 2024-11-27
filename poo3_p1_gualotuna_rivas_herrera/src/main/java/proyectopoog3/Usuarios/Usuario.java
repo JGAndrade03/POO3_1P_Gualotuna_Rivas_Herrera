@@ -1,14 +1,15 @@
-package proyectopoog3;
+package proyectopoog3.Usuarios;
 
-import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
 
-//librerias para correos
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import io.github.cdimascio.dotenv.*;
+import proyectopoog3.EspacioYReserva.Espacio;
+import proyectopoog3.EspacioYReserva.Reserva;
+
 import java.util.Properties;
 
 
@@ -21,6 +22,7 @@ public abstract class Usuario {
     protected String contraseña;
     protected String correo;
     //protected char rol;
+    public Usuario espacios;
 
     public Usuario(String codeUser, String cedula, String nombre, String apellido, String usuario, String contraseña, String correo){
         this.codeUser=codeUser;
@@ -101,13 +103,13 @@ public abstract class Usuario {
     
     //Metodos
 
-    public abstract void gestionarReserva(ArrayList<Espacio> espacios, ArrayList<Reserva> reservas);
+    public abstract void gestionarReserva(ArrayList<Espacio> espacios);
 
     public boolean validarCredencial(String usuario, String contraseña){
         return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
     }
 
-    public abstract void consultarReserva();
+    public abstract void consultarReserva(ArrayList<Reserva> reservas);
     
 
     public Session iniciarSesion(){

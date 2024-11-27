@@ -2,6 +2,13 @@ package proyectopoog3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import proyectopoog3.EspacioYReserva.Espacio;
+import proyectopoog3.EspacioYReserva.Reserva;
+import proyectopoog3.Usuarios.Administrador;
+import proyectopoog3.Usuarios.Estudiante;
+import proyectopoog3.Usuarios.Profesor;
+import proyectopoog3.Usuarios.Usuario;
+
 public class App {
     // Listas de objetos
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -16,49 +23,50 @@ public class App {
                 System.out.println("Bienvenido estudiante: "+est.getNombre()+" "+est.getApellido());
                 System.out.println("¿Desea?\n\t1. Reservar\n\t2. Consultar Reserva\n\t3. Salir");
                 System.out.print("Escriba el numero de su eleccion: ");
-                int eleccion = sc.nextInt();
-                sc.nextLine();
+                String eleccion = sc.nextLine();
+    
 
-                if(eleccion == 1){
+                if(eleccion.equals("1")){
                     est.gestionarReserva(espacios);
-                }else if(eleccion == 2){
-                    est.consultarReserva();
-                }else if(eleccion == 3){
+                }else if(eleccion.equals("2")){
+                    est.consultarReserva(reservas);
+                }else if(eleccion.equals("3")){
                     mostrarMenu(Reserva.verificarUsuario(usuarios), espacios);
                 }else{
                     System.out.println("Error");
+                    mostrarMenu(user, espacios);
                 }
             }else if(user instanceof Profesor){
                 Profesor prof = (Profesor) user;
                 System.out.println("Bienvenido profesor/a: "+prof.getNombre()+" "+prof.getApellido());
                 System.out.println("¿Desea?\n\t1. Reservar\n\t2. Consultar Reserva\n\t3. Salir");
                 System.out.print("Escriba el numero de su eleccion: ");
-                int eleccion = sc.nextInt();
-                sc.nextLine();
-                if(eleccion == 1){
+                String eleccion = sc.nextLine();
+                if(eleccion.equals("1")){
                     prof.gestionarReserva(espacios);
-                }else if(eleccion == 2){
-                    prof.consultarReserva();
-                }else if(eleccion == 3){
+                }else if(eleccion.equals("2")){
+                    prof.consultarReserva(reservas);
+                }else if(eleccion.equals("3")){
                     mostrarMenu(Reserva.verificarUsuario(usuarios), espacios);
                 }else{
                     System.out.println("Error");
+                    mostrarMenu(user, espacios);
                 }
             }else if(user instanceof Administrador){
                 Administrador admin = (Administrador) user;
                 System.out.println("Bienvenido administrador/a: "+admin.getNombre()+" "+admin.getApellido());
-                System.out.println("¿Desea?\n\t1. Reservar\n\t2. Consultar Reserva\n\t3. Salir");
+                System.out.println("¿Desea?\n\t1. Gestionar reservas\n\t2. Consultar Reserva\n\t3. Salir");
                 System.out.print("Escriba el numero de su eleccion: ");
-                int eleccion = sc.nextInt();
-                sc.nextLine();
-                if(eleccion == 1){
+                String eleccion = sc.nextLine();
+                if(eleccion.equals("1")){
                     admin.gestionarReserva(espacios);
-                }else if(eleccion == 2){
-                    admin.consultarReserva();
-                }else if(eleccion == 3){
+                }else if(eleccion.equals("2")){
+                    admin.consultarReserva(reservas);
+                }else if(eleccion.equals("3")){
                     mostrarMenu(Reserva.verificarUsuario(usuarios), espacios);
                 }else{
                     System.out.println("Error");
+                    mostrarMenu(user, espacios);
                 }
 
             }sc.close();
@@ -88,6 +96,5 @@ public class App {
     
             //Programa
             mostrarMenu(Reserva.verificarUsuario(usuarios), espacios);
-
     }
 }

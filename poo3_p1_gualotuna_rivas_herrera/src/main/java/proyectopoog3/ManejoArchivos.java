@@ -11,6 +11,17 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import proyectopoog3.Enums.EstadoEspacio;
+import proyectopoog3.Enums.EstadoReserva;
+import proyectopoog3.Enums.RolesPermitidos;
+import proyectopoog3.Enums.TipoEspacio;
+import proyectopoog3.EspacioYReserva.Espacio;
+import proyectopoog3.EspacioYReserva.Reserva;
+import proyectopoog3.Usuarios.Administrador;
+import proyectopoog3.Usuarios.Estudiante;
+import proyectopoog3.Usuarios.Profesor;
+import proyectopoog3.Usuarios.Usuario;
+
 public class ManejoArchivos {
 
     //Metodo de lectura
@@ -158,7 +169,7 @@ public class ManejoArchivos {
             LocalDate fecha = LocalDate.parse(l_reserva.get(3));
             int codReserva = Integer.parseInt(l_reserva.get(0));
             int codEspacio = Integer.parseInt(l_reserva.get(4));
-            Reserva reserva = new Reserva(codReserva, l_reserva.get(1), l_reserva.get(2), fecha, codEspacio, espacio, estadoR, l_reserva.get(7));
+            Reserva reserva = new Reserva(codReserva, l_reserva.get(1), l_reserva.get(2), fecha, codEspacio, espacio, estadoR, l_reserva.get(7), l_reserva.get(6));
             reservas.add(reserva);
 
         }
