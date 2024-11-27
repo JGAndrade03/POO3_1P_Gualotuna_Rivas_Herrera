@@ -103,7 +103,7 @@ public class Reserva {
 
     public static Usuario verificarUsuario(ArrayList<Usuario> usuarios){
         System.out.println("------------------------------------------------------------");
-        System.out.println("Bienvenido - Realiza tu reserva.");
+        System.out.println("Bienvenido - Ingrese al sistema.");
         Scanner sc = new Scanner(System.in);
         System.out.print("Nombre de usuario: ");
         String usuario = sc.nextLine();

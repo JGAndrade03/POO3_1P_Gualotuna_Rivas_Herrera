@@ -33,7 +33,7 @@ public class Administrador extends Usuario {
     // }
 
     @Override
-    public void gestionarReserva(ArrayList<Espacio> espacios){
+    public void gestionarReserva(ArrayList<Espacio> espacios) {
         Scanner sc = new Scanner(System.in);
         String continuar;
 

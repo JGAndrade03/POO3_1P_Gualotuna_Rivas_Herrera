@@ -91,7 +91,13 @@ public class ManejoArchivos {
                     }
                     if(l_user.get(0).equals(l_profesor.get(0))){
                         profesor.setFacultad(l_profesor.get(4));
-                        profesor.setMaterias(l_profesor.get(5));
+
+                        ArrayList<String> materias = new ArrayList<>();
+                        String[] a_materias = l_profesor.get(5).split(",");
+                        for (String elemento : a_materias) {
+                            materias.add(elemento);
+                        }
+                        profesor.setMaterias(materias);
                         usuarios.add(profesor);
                     }
                 }

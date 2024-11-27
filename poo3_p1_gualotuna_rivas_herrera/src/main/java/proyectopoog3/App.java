@@ -10,7 +10,7 @@ public class App {
     
         public static void mostrarMenu(Usuario user, ArrayList<Espacio> espacios){
             Scanner sc = new Scanner(System.in);
-
+            System.out.println("------------------------------------------------------------");
             if(user instanceof Estudiante){
                 Estudiante est = (Estudiante) user;
                 System.out.println("Bienvenido estudiante: "+est.getNombre()+" "+est.getApellido());
@@ -88,5 +88,6 @@ public class App {
     
             //Programa
             mostrarMenu(Reserva.verificarUsuario(usuarios), espacios);
+
     }
 }

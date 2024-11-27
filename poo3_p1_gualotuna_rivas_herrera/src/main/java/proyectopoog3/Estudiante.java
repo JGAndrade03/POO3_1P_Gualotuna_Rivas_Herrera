@@ -76,13 +76,23 @@ public class Estudiante extends Usuario {
                 String estadoR = reserva.getEstadoR().toString();
 
                 String linea = "\n"+codR+" | "+super.codeUser+" | "+super.cedula+" | "+fdate+" | "+codE+" | "+tipoE+" | "+estadoR+" | "+motivo;
-                                                                                                     
-                Reserva.reservas.add(reserva);
-                ManejoArchivos.EscribirArchivo("reservas.txt", linea);
+                
+                System.out.println("Desea realizar la reserva (Si/No): ");
+                String election = sc.nextLine();
+                if(election.toUpperCase().equals("SI")){
+                    Reserva.reservas.add(reserva);
+                    ManejoArchivos.EscribirArchivo("reservas.txt", linea);
+                    System.out.println("Su reserva se encuentra pendiente.");
+                    enviarMail();
+                    App.mostrarMenu(this, espacios);
+                }else{
+                    App.mostrarMenu(this, espacios);
+                }
+
+                
             }
 
         }
-        App.mostrarMenu(this, espacios);
         sc.close();
 
     }
@@ -92,7 +102,7 @@ public class Estudiante extends Usuario {
     
     }
 
-    public void enviarMail(String correo) {
+    public void enviarMail() {
 
     }
 
